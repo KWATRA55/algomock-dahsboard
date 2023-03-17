@@ -17,7 +17,7 @@ export default function Home() {
       <main className={styles.main}>
         <div className={styles.description}>
           <p>
-            Shashwat Kwatra &nbsp;
+            Get started by editing&nbsp;
             <code className={styles.code}>pages/index.js</code>
           </p>
           <div>
@@ -67,7 +67,7 @@ export default function Home() {
             rel="noopener noreferrer"
           >
             <h2 className={inter.className}>
-              shashwat <span>-&gt;</span>
+              Docs <span>-&gt;</span>
             </h2>
             <p className={inter.className}>
               Find in-depth information about Next.js features and&nbsp;API.
