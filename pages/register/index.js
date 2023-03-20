@@ -15,11 +15,10 @@ import {
     Icon,
   } from '@chakra-ui/react';
   import Router from 'next/router'
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext } from 'react';
 import { UserContext } from '../UserContext';
-import { LoginUser } from '../../functions/loginFunctions';
-import { login } from '@/functions/request';
-import AuthContext from '@/context/AuthProvider';
+import { RegisterUser } from '@/functions/loginFunctions';
+import { register } from '@/functions/request';
   
   const avatars = [
     {
@@ -50,19 +49,14 @@ import AuthContext from '@/context/AuthProvider';
 
   export default function JoinOurTeam() {
 
-    const {auth, setAuth} = useContext(AuthContext);
-
-    const userRef = useRef();
-    const errRef = useRef();
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const [hasError, setHasError] = useState(false);
     const [errorMessage, setErrorMessage] = useState('');
 
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
     const [data, setData] = useState([]);
-
-    const [success, setSuccess] = useState(false);
  
 
     const {value, setValue} = useContext(UserContext);
@@ -70,22 +64,18 @@ import AuthContext from '@/context/AuthProvider';
 
     const handleClick = async () => {
       try{
-        let json = await login(email, password);
-          if(json?.code > 202){
+          const json = await register(name, email, password);
+          console.log(json)
+          if(json.code > 202){
             setHasError(true);
-            setErrorMessage(json?.message);
+            setErrorMessage(json.message);
           }
-          console.log('json response : ',json);
-
-          const accessToken = json?.data?.tokens?.access?.token;
-
-          setAuth({email, password, accessToken});
-          console.log('auth : ', auth);
+          console.log(json)
           setData(json);
+  
           setValue(Object.values(json));
-
-          console.log('context value : ', value);
-          console.log('token : ', json?.data?.tokens?.access?.token);
+        
+          console.log(json?.data?.tokens?.access?.token);
           sessionStorage.setItem("key", json?.data?.tokens?.access?.token);
           Router.push(`/dashboard`); 
         }
@@ -94,39 +84,7 @@ import AuthContext from '@/context/AuthProvider';
           console.log(err);
         }
   
-        // var requestOptions = {
-        //   method: 'POST',
-        //   headers: myHeaders,
-        //   body: raw,
-        //   redirect: 'follow'
-        // };
-
-
-      // try{
-      //   const res = await fetch("https://stage.algomock.in/v1//auth/login", requestOptions)
-      //   const json = await res.json();
-      //   if(json.code > 202){
-      //     setHasError(true);
-      //     setErrorMessage(json.message);
-      //   }
-      //   console.log(json)
-      //   setData(json);
-
-      //   setValue(Object.values(json));
-      
-      //   console.log(json.tokens.access.token);
-      //   sessionStorage.setItem("key", json.tokens.access.token);
-      //   Router.push(`/dashboard/${json.user.id}`); 
-      // }
-      // catch(err){
-      //   setHasError(true);
-      //   console.log(err);
-      // }
       }
-
-      useEffect(() => {
-        setErrorMessage('');
-      }, [email, password]);
 
     return (
       <Box position={'relative'}>
@@ -215,7 +173,7 @@ import AuthContext from '@/context/AuthProvider';
                 color={'gray.800'}
                 lineHeight={1.1}
                 fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
-                Login
+                Register here
                 <Text
                   as={'span'}
                   bgGradient="linear(to-r, red.400,pink.400)"
@@ -224,11 +182,22 @@ import AuthContext from '@/context/AuthProvider';
                 </Text>
               </Heading>
               <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-               Login If you already have an account
+               Sign Up If you don't have an account
               </Text>
             </Stack>
             <Box as={'form'} mt={10}>
               <Stack spacing={4}>
+              <Input
+                  placeholder="Name"
+                  bg={'gray.100'}
+                  border={0}
+                  color={'gray.500'}
+                  _placeholder={{
+                    color: 'gray.500',
+                  }}
+                  value={name}
+                  onChange={(event) => setName(event.target.value)}
+                />
                 <Input
                   placeholder="Email"
                   bg={'gray.100'}
@@ -273,10 +242,6 @@ import AuthContext from '@/context/AuthProvider';
                   bgClip="text">
                   {errorMessage}
                 </Text> : null}
-
-              <p ref={errRef} className={errorMessage ? "errmsg" : "offscreen"} aria-live="assertive">
-                {errorMessage}
-              </p>
             </Box>
             form
           </Stack>
