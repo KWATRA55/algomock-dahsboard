@@ -1,29 +1,18 @@
-import React, { useEffect } from 'react'
-import Header from '@/components/dashboard/Header'
-import Sidebar from '@/components/dashboard/Sidebar'
-import Home from '@/components/dashboard/Home'
-import AuthContext from '@/context/AuthProvider';
-import { useContext } from 'react';
+import Head from 'next/head'
+import Image from 'next/image'
+import { Inter } from '@next/font/google'
+import styles from '@/styles/Home.module.css'
 
-function test() {
-  const {auth, setAuth} = useContext(AuthContext);
-  useEffect(() => {
-    console.log('auth context : ', auth);
-    console.log(auth.length)
-  }, []);
+const inter = Inter({ subsets: ['latin'] })
+
+export default function Home() {
   return (
-    <div>
-        {/* {Object.keys(auth).length !== 0 ?  */}
-        <div>
-          <Header />
-          <div style={{display: 'flex', flexDirection: 'column'}}>
-            <Sidebar />
-            <Home />
-          </div>
-        </div>
-        {/* </div> : null} */}
-    </div>
+    <>
+      <Head>
+      </Head>
+      <main>
+      <script src="https://kit.fontawesome.com/339a0e21ca.js" crossorigin="anonymous"></script>
+      </main>
+    </>
   )
 }
-
-export default test
