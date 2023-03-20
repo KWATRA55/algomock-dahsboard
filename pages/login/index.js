@@ -16,7 +16,6 @@ import {
   } from '@chakra-ui/react';
   import Router from 'next/router'
 import { useState, useContext, useEffect, useRef } from 'react';
-import { UserContext } from '../UserContext';
 import { login } from '@/functions/request';
 import AuthContext from '@/context/AuthProvider';
   
