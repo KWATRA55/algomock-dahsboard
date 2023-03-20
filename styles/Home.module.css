@@ -1,3 +1,7 @@
+.sidebar{
+  color: blue;
+}
+
 .main {
   display: flex;
   flex-direction: column;

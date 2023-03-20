@@ -1,0 +1,33 @@
+.item{
+    width: 15%;
+}
+.algoBox{
+    height: 35vh;
+    width: 100%;
+    overflow:auto;
+}
+.red{
+        height: 10px;
+        width: 10px;
+        background-color: red;
+        border-radius: 50%;
+        display: inline-block;
+}
+.green{
+    height: 10px;
+    width: 10px;
+    background-color: green;
+    border-radius: 50%;
+    display: inline-block;
+}
+.algoItem{
+    width: 11.5%;
+    margin: 0;
+}   
+
+.redText{
+    color: red;
+}
+.greenText{
+    color: green;
+}
