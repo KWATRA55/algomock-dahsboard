@@ -50,7 +50,6 @@ import AuthContext from '@/context/AuthProvider';
 
     const {auth, setAuth} = useContext(AuthContext);
 
-    const userRef = useRef();
     const errRef = useRef();
 
     const [hasError, setHasError] = useState(false);
@@ -62,8 +61,6 @@ import AuthContext from '@/context/AuthProvider';
 
     const [success, setSuccess] = useState(false);
  
-
-    const {value, setValue} = useContext(UserContext);
 
 
     const handleClick = async () => {
@@ -80,9 +77,7 @@ import AuthContext from '@/context/AuthProvider';
           setAuth({email, password, accessToken});
           console.log('auth : ', auth);
           setData(json);
-          setValue(Object.values(json));
 
-          console.log('context value : ', value);
           console.log('token : ', json?.data?.tokens?.access?.token);
           sessionStorage.setItem("key", json?.data?.tokens?.access?.token);
           Router.push(`/dashboard`); 
