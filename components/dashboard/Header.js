@@ -1,22 +1,37 @@
 import React from 'react'
-import { useRouter } from 'next/router'
-
+import Router from 'next/router'
+import {logo} from '../../assets/dashboard/logo.jpg'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Button from 'react-bootstrap/Button';
 import { Password, UserAvatar, Receipt, Badge, Logout, Settings, ChartColumn, CheckmarkOutline } from '@carbon/icons-react';
+import { clearLocalStorage, getLocalStorage } from '@/functions/dashboardFunctions';
+import { logoutUser } from '@/functions/request';
+import AuthContext from '@/context/AuthProvider';
+import { useContext } from 'react';
 
 
 function Header() {
+  const {setAuth} = useContext(AuthContext);
+
+  let refreshToken = getLocalStorage('refreshToken');
+  const handleLogout = async () => {
+    let res = await logoutUser(refreshToken);
+    if(res.status === 204){
+      setAuth({});
+      clearLocalStorage();
+      Router.push('/login');
+    }
+  }
   return (
     <div>
     <Navbar bg="dark" variant="dark" style={{ position:'fixed', width: '100%', zIndex:'3'}}>
     <Container style={{width:'100%', height: "7vh", display:'flex', justifyContent:"space-between"}}>
       <div className='headerLeft' style={{display:'flex'}}>
-        <img src={require('../../assets/dashboard/logo.jpg')} alt='' className='logo' style={{height:'20px', width:"20px", margin:'1vw'}}/>
-        <Navbar.Brand href="#home">Title</Navbar.Brand>
+        <img src={logo} alt='' className='logo' style={{height:'20px', width:"20px", margin:'1vw'}}/>
+        <Navbar.Brand href="#home">AlgoMock</Navbar.Brand>
       </div>
       <div className='headerRight' style={{display:'flex'}}>
         <Nav className="me-auto">
@@ -37,7 +52,7 @@ function Header() {
             <NavDropdown.Item href="#action3" style={{display:'flex'}}><Settings style={{margin:'4%'}}/>Broker Setup</NavDropdown.Item>
             <NavDropdown.Item href="#action4" style={{display:'flex'}}><ChartColumn style={{margin:'4%'}}/>Reports</NavDropdown.Item>
             <NavDropdown.Item href="#action3" style={{display:'flex'}}><CheckmarkOutline style={{margin:'4%'}}/>Dark Theme</NavDropdown.Item>
-            <NavDropdown.Item href="#action4" style={{display:'flex'}}><Logout style={{margin:'4%'}}/>Logout</NavDropdown.Item>
+            <NavDropdown.Item style={{display:'flex'}} onClick={handleLogout}><Logout style={{margin:'4%'}}/>Logout</NavDropdown.Item>
           </NavDropdown>
         </Nav>
       </div>
