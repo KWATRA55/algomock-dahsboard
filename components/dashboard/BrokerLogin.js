@@ -22,9 +22,11 @@ function BrokerLogin() {
   }
 
   const handleDelete = async (broker_name, broker_id) => {
-    deleteBrokerAccount(accessToken, broker_name, broker_id);
-    setAccDeleted(true);
-    getAllBrokerAccounts();
+    let res = await deleteBrokerAccount(accessToken, broker_name, broker_id);
+    if(res === 204){
+      setAccDeleted(true);
+      getAllBrokerAccounts();
+    }
   }
   // const brokersData = [
   //   { broker_name: 'Broker 1', broker_id: 1, api_key: '1234' },
@@ -34,10 +36,10 @@ function BrokerLogin() {
   
   const tableRows = brokers.map((broker) => (
     <tr key={broker._id}>
-      <td>{broker.broker_name}</td>
-      <td>{broker._id}</td>
+      <td>{broker.broker_name.toUpperCase()}</td>
+      {/* <td>{broker._id}</td> */}
       <td>{broker.api_key}</td>
-      <td><Button variant="primary">Edit</Button></td>
+      {/* <td><Button variant="primary">Edit</Button></td> */}
       <td><Button variant="danger" onClick={() => handleDelete(broker.broker_name, broker._id)}>Delete</Button></td>
     </tr>
   ));
@@ -93,9 +95,9 @@ function BrokerLogin() {
             <thead>
               <tr>
                 <th>Broker Name</th>
-                <th>Broker ID</th>
+                {/* <th>Broker ID</th> */}
                 <th>Api Key</th>
-                <th>Edit</th>
+                {/* <th>Edit</th> */}
                 <th>Delete</th>
               </tr>
             </thead>

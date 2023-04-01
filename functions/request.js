@@ -71,11 +71,12 @@ export default async function setUpAccount(accessToken, payload, brokerName){
 
 export async function deleteBrokerAccount(accessToken, broker_name, broker_id){
     try{
-        await axios.delete(baseUrl + 'broker/' + broker_name + '/accounts/' + broker_id,
+        let res = await axios.delete(baseUrl + 'broker/' + broker_name + '/accounts/' + broker_id,
         {   headers: {
                 Authorization : `Bearer ${accessToken}`
             }
         })
+        return res?.status;
     }catch(err){
         console.log('Error : ', err);
     }
