@@ -1,52 +1,11 @@
-import {
-  Box,
-  Flex,
-  Stack,
-  Heading,
-  Text,
-  Container,
-  Input,
-  Button,
-  SimpleGrid,
-  Avatar,
-  AvatarGroup,
-  useBreakpointValue,
-  IconProps,
-  Icon,
-} from '@chakra-ui/react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import Router from 'next/router'
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { register } from '@/functions/request';
 import AuthContext from '@/context/AuthProvider';
 import { setLocalStorage } from '@/functions/dashboardFunctions';
-
-
-const avatars = [
-  {
-    name: 'Ryan Florence',
-    url: 'https://bit.ly/ryan-florence',
-  },
-  {
-    name: 'Segun Adebayo',
-    url: 'https://bit.ly/sage-adebayo',
-  },
-  {
-    name: 'Kent Dodds',
-    url: 'https://bit.ly/kent-c-dodds',
-  },
-  {
-    name: 'Prosper Otemuyiwa',
-    url: 'https://bit.ly/prosper-baba',
-  },
-  {
-    name: 'Christian Nwamba',
-    url: 'https://bit.ly/code-beast',
-  },
-];
-
-
-var myHeaders = new Headers();
-myHeaders.append("Content-Type", "application/json");
+import {redText} from '../../styles/styles.module.css'
 
 export default function JoinOurTeam() {
 
@@ -64,28 +23,32 @@ export default function JoinOurTeam() {
   const handleClick = async () => {
     try{
         const json = await register(name, email, password);
-        console.log(json)
-        if(json.code > 202){
+  
+        if(json?.code > 202){
           setHasError(true);
-          setErrorMessage(json.message);
+          setErrorMessage(json?.message);
+          console.log('main error : ', json?.message);
         }
-        console.log(json)
 
-        const accessToken = json?.data?.tokens?.access?.token;
-        const refreshToken = json?.data?.tokens?.refresh?.token;
-        const userId = json?.data?.user?.id;
+        else{
+          const accessToken = json?.data?.tokens?.access?.token;
+          const refreshToken = json?.data?.tokens?.refresh?.token;
+          const userId = json?.data?.user?.id;
 
-        setAuth({email, password, accessToken, refreshToken, userId});
-        setData(json);
-      
-        console.log('token : ', json?.data?.tokens?.access?.token);
-        console.log('user id : ', userId);
+          setAuth({email, password, accessToken, refreshToken, userId});
+          setData(json);
 
-        setLocalStorage('accessToken', accessToken);
-        setLocalStorage('refreshToken', refreshToken);
-        setLocalStorage('userId', userId);
+          console.log('token : ', accessToken);
+          console.log('user id : ', userId);
 
-        Router.push(`/dashboard`); 
+          setLocalStorage('accessToken', accessToken);
+          setLocalStorage('refreshToken', refreshToken);
+          setLocalStorage('userId', userId);
+
+          if(accessToken){
+            Router.push(`/dashboard`); 
+          }
+        }
       }
       catch(err){
         setHasError(true);
@@ -94,193 +57,52 @@ export default function JoinOurTeam() {
 
     }
 
+    useEffect(() => {
+      if (hasError) {
+        setTimeout(() => {
+          setHasError(false);
+        }, 5000);
+      }
+    }, [hasError]);
+
   return (
-    <Box position={'relative'}>
-      <Container
-        as={SimpleGrid}
-        maxW={'7xl'}
-        columns={{ base: 1, md: 2 }}
-        spacing={{ base: 10, lg: 32 }}
-        py={{ base: 10, sm: 20, lg: 32 }}>
-        <Stack spacing={{ base: 10, md: 20 }}>
-          <Heading
-            lineHeight={1.1}
-            fontSize={{ base: '3xl', sm: '4xl', md: '5xl', lg: '6xl' }}>
-            Senior web designers{' '}
-            <Text
-              as={'span'}
-              bgGradient="linear(to-r, red.400,pink.400)"
-              bgClip="text">
-              &
-            </Text>{' '}
-            Full-Stack Developers
-          </Heading>
-          <Stack direction={'row'} spacing={4} align={'center'}>
-            <AvatarGroup>
-              {avatars.map((avatar) => (
-                <Avatar
-                  key={avatar.name}
-                  name={avatar.name}
-                  src={avatar.url}
-                  size={useBreakpointValue({ base: 'md', md: 'lg' })}
-                  position={'relative'}
-                  zIndex={2}
-                  _before={{
-                    content: '""',
-                    width: 'full',
-                    height: 'full',
-                    rounded: 'full',
-                    transform: 'scale(1.125)',
-                    bgGradient: 'linear(to-bl, red.400,pink.400)',
-                    position: 'absolute',
-                    zIndex: -1,
-                    top: 0,
-                    left: 0,
-                  }}
-                />
-              ))}
-            </AvatarGroup>
-            <Text fontFamily={'heading'} fontSize={{ base: '4xl', md: '6xl' }}>
-              +
-            </Text>
-            <Flex
-              align={'center'}
-              justify={'center'}
-              fontFamily={'heading'}
-              fontSize={{ base: 'sm', md: 'lg' }}
-              bg={'gray.800'}
-              color={'white'}
-              rounded={'full'}
-              minWidth={useBreakpointValue({ base: '44px', md: '60px' })}
-              minHeight={useBreakpointValue({ base: '44px', md: '60px' })}
-              position={'relative'}
-              _before={{
-                content: '""',
-                width: 'full',
-                height: 'full',
-                rounded: 'full',
-                transform: 'scale(1.125)',
-                bgGradient: 'linear(to-bl, orange.400,yellow.400)',
-                position: 'absolute',
-                zIndex: -1,
-                top: 0,
-                left: 0,
-              }}>
-              YOU
-            </Flex>
-          </Stack>
-        </Stack>
-        <Stack
-          bg={'gray.50'}
-          rounded={'xl'}
-          p={{ base: 4, sm: 6, md: 8 }}
-          spacing={{ base: 8 }}
-          maxW={{ lg: 'lg' }}>
-          <Stack spacing={4}>
-            <Heading
-              color={'gray.800'}
-              lineHeight={1.1}
-              fontSize={{ base: '2xl', sm: '3xl', md: '4xl' }}>
-              Register here
-              <Text
-                as={'span'}
-                bgGradient="linear(to-r, red.400,pink.400)"
-                bgClip="text">
-                !
-              </Text>
-            </Heading>
-            <Text color={'gray.500'} fontSize={{ base: 'sm', sm: 'md' }}>
-             Sign Up If you don't have an account
-            </Text>
-          </Stack>
-          <Box as={'form'} mt={10}>
-            <Stack spacing={4}>
-            <Input
-                placeholder="Name"
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}
-                value={name}
-                onChange={(event) => setName(event.target.value)}
-              />
-              <Input
-                placeholder="Email"
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
-              />
-              <Input
-                placeholder="Password"
-                type='password'
-                bg={'gray.100'}
-                border={0}
-                color={'gray.500'}
-                _placeholder={{
-                  color: 'gray.500',
-                }}
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-              />
-              
-            </Stack>
-            <Button
-              fontFamily={'heading'}
-              mt={8}
-              w={'full'}
-              bgGradient="linear(to-r, red.400,pink.400)"
-              color={'white'}
-              onClick={handleClick}
-              _hover={{
-                bgGradient: 'linear(to-r, red.400,pink.400)',
-                boxShadow: 'xl',
-              }}>
-              Submit
-            </Button>
-            {hasError ? <Text
-                as={'span'}
-                bgGradient="linear(to-r, red.400,pink.400)"
-                bgClip="text">
-                {errorMessage}
-              </Text> : null}
-          </Box>
-          form
-        </Stack>
-      </Container>
-      <Blur
-        position={'absolute'}
-        top={-10}
-        left={-10}
-        style={{ filter: 'blur(70px)' }}
-      />
-    </Box>
+    <div style={{display:'flex', justifyContent:'center', alignItems:'center', height:'90vh'}}>
+      <Form style={{ width:'40vw', border:'solid 1px gray', padding:'3vh'}}>
+        
+      <div style={{textAlign:'center', marginBottom:'3vh'}}>
+        <h1 style={{fontSize:'40px', fontWeight:'bolder'}}>Sign Up Here!</h1>
+      </div>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Control type="name" placeholder="Enter name" 
+          value={name}
+          onChange={(event) => setName(event.target.value)}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicEmail">
+        <Form.Control type="email" placeholder="Enter email" 
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}/>
+      </Form.Group>
+
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Control type="password" placeholder="Password" 
+          value={password}
+          onChange={(event) => setPassword(event.target.value)}/>
+      </Form.Group>
+      <Button variant="primary" style={{width:'100%'}}
+        onClick={handleClick}>
+        Submit
+      </Button>
+
+      <div style={{textAlign:'center', marginTop:'1.5vh'}}>
+        {hasError ? <p className={redText}>{errorMessage}</p> : null}
+      </div>
+
+      <div style={{textAlign:'center', marginTop:'1.5vh'}}>
+        <a href='/login' style={{textDecoration:'none'}}>Login here, If you already have an account</a>
+      </div>
+      </Form>
+  </div>
   );
 }
-
-export const Blur = (props) => {
-  return (
-    <Icon
-      width={useBreakpointValue({ base: '100%', md: '40vw', lg: '30vw' })}
-      zIndex={useBreakpointValue({ base: -1, md: -1, lg: 0 })}
-      height="560px"
-      viewBox="0 0 528 560"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      {...props}>
-      <circle cx="71" cy="61" r="111" fill="#F56565" />
-      <circle cx="244" cy="106" r="139" fill="#ED64A6" />
-      <circle cy="291" r="139" fill="#ED64A6" />
-      <circle cx="80.5" cy="189.5" r="101.5" fill="#ED8936" />
-      <circle cx="196.5" cy="317.5" r="101.5" fill="#ECC94B" />
-      <circle cx="70.5" cy="458.5" r="101.5" fill="#48BB78" />
-      <circle cx="426.5" cy="-0.5" r="101.5" fill="#4299E1" />
-    </Icon>
-  );
-};
