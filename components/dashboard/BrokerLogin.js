@@ -82,13 +82,13 @@ function BrokerLogin() {
             {accDeleted ? <h2 className={redText}>Account Deleted Successfully</h2> : null}
         </div>
 
-        <h1 style={{fontSize: '20px', fontFamily: 'Roboto, Helvetica, sans-serif'}}><b>Select Client ID / Broker:</b></h1>
-        <h2 style={{color:'gray', margin:'2vh 0'}}>Select account :</h2>
+        <h4 style={{ fontFamily: 'Roboto, Helvetica, sans-serif'}}><b>Select Client ID / Broker :</b></h4>
+        <h4 style={{color:'gray', margin:'2vh 0'}}>Select account :</h4>
 
         {totalAccounts === 0 
         ?  
         <div>
-          <h2 style={{ margin:'2vh 0'}}>No broker has been configured. Configure atleast one broker first</h2>
+          <h5 style={{ margin:'2vh 0'}}>No broker has been configured. Configure atleast one broker first</h5>
         </div>
         :
         <Table striped bordered hover>

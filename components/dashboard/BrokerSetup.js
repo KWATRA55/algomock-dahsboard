@@ -15,8 +15,8 @@ function BrokerSetup() {
 
   return (
     <div style={{margin: '15vh 7vw'}}>
-          <h1 style={{fontSize: '20px', fontFamily: 'Roboto, Helvetica, sans-serif'}}><b>Select Client ID / Broker:</b></h1>
-          <h2 style={{color:'gray', margin:'2vh 0'}}>Select broker :</h2>
+          <h3 style={{ fontFamily: 'Roboto, Helvetica, sans-serif'}}><b>Select Client ID / Broker:</b></h3>
+          <h4 style={{color:'gray', margin:'2vh 0'}}>Select broker :</h4>
 
           {/* <div >
             <TestForm name1='FINVASIA' imageUrl1="https://shoonya.com/static/img/shoonya_logo.1937b07.png" 

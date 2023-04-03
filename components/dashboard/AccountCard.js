@@ -68,9 +68,9 @@ function AccountCard({name, imageUrl, config}) {
             {failure ? <h2 className={redText}>Account Linking failed</h2> : null}
         </div>
 
-        <div style={{textAlign:'center', backgroundColor:'#efeeee', borderRadius:'5px', padding:'4vh 6vh'}}>
+        <div style={{textAlign:'center', backgroundColor:'#efeeee', borderRadius:'5px', padding:'4vh 6vh', width:'20vw'}}>
             <img src={imageUrl} className={accountCardImage}/>
-            <h1 style={{margin : '2vh 0'}}>{name}</h1>
+            <h3 style={{margin : '2vh 0'}}>{name}</h3>
             <Button as="input" onClick={openForm} type="button" value="Setup" />
         </div>
 

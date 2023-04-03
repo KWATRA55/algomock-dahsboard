@@ -102,7 +102,7 @@ export default function Login() {
   return (
     <div style={{display:'flex', justifyContent:'center', alignItems:'center', height:'90vh'}}>
       
-      <Form style={{ width:'40vw', border:'solid 1px gray', padding:'3vh'}}>
+      <Form style={{ width:'35vw', border:'solid 1px gray', padding:'3vh'}}>
         
       <div style={{textAlign:'center', marginBottom:'3vh'}}>
         <h1 style={{fontSize:'40px', fontWeight:'bolder'}}>Login Here!</h1>
