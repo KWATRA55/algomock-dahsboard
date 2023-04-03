@@ -5,8 +5,6 @@ import Sidebar from '@/components/dashboard/Sidebar';
 import BrokerLogin from '@/components/dashboard/BrokerLogin';
 
 function broker_login() {
-  const router = useRouter();
-  console.log(router.query.id); 
 
   return (
     <div>

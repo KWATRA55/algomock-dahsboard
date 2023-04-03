@@ -10,10 +10,10 @@ import { getUserData } from '@/functions/request';
 
 function test() {
   const {auth, setAuth} = useContext(AuthContext);
-  useEffect(() => {
-    const accessToken = getLocalStorage('accessToken');
+  const accessToken = getLocalStorage('accessToken');
     const refreshToken = getLocalStorage('accessToken');
     const userId = getLocalStorage('userId');
+  useEffect(() => {
 
     getUserData(accessToken, userId); // to get the user data from access token and user ID
 
@@ -36,14 +36,13 @@ function test() {
 
   return (
     <div>
-        {Object.keys(auth).length !== 0 ? 
         <div>
           <Header />
           <div style={{display: 'flex', flexDirection: 'column'}}>
             <Sidebar />
             <Home />
           </div>
-        </div> : null}
+        </div>
     </div>
   )
 }
