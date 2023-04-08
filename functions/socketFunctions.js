@@ -1,4 +1,4 @@
-import io from 'Socket.IO-client';
+import io from 'socket.io-client';
 import { marketDataRoute } from './apiRoutes';
 
 export function getMarketPrice () {

@@ -11,7 +11,6 @@ import { clearLocalStorage, getLocalStorage } from '@/functions/dashboardFunctio
 import { logoutUser } from '@/functions/request';
 import AuthContext from '@/context/AuthProvider';
 import { useContext } from 'react';
-import io from 'Socket.IO-client';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import {greenText, redText} from '../../styles/styles.module.css'
@@ -49,7 +48,7 @@ const socketData = () => {
         key = document.getElementById(key);
         let previousVal = parseInt(key.textContent);
         
-        if(newVal>previousVal)
+        if(newVal>  previousVal)
         {
           key.style.color = 'green';
         }
