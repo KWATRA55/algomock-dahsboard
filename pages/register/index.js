@@ -34,8 +34,9 @@ export default function JoinOurTeam() {
           const accessToken = json?.data?.tokens?.access?.token;
           const refreshToken = json?.data?.tokens?.refresh?.token;
           const userId = json?.data?.user?.id;
+          const name = json?.data?.user?.name;
 
-          setAuth({email, password, accessToken, refreshToken, userId});
+          setAuth({email, password, accessToken, refreshToken, userId, name});
           setData(json);
 
           console.log('token : ', accessToken);
@@ -44,6 +45,7 @@ export default function JoinOurTeam() {
           setLocalStorage('accessToken', accessToken);
           setLocalStorage('refreshToken', refreshToken);
           setLocalStorage('userId', userId);
+          setLocalStorage('name', name);
 
           if(accessToken){
             Router.push(`/dashboard`); 

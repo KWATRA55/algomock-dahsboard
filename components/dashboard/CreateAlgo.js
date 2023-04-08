@@ -216,11 +216,11 @@ function CreateAlgo() {
             <h3><Form.Label  style={{color : 'gray', margin:'5vh 0'}}>MMT TARGET</Form.Label></h3>
                 <div style={{display : 'flex', justifyContent: 'space-around', textAlign: 'left'}}>
                 <div>
-                    <h3><Form.Label >Type</Form.Label></h3>
+                    <Form.Label >Type</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div>
-                    <h3><Form.Label >Value</Form.Label></h3>
+                    <Form.Label >Value</Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>%</InputGroup.Text>
                         <Form.Control aria-label="" />
@@ -228,27 +228,27 @@ function CreateAlgo() {
                 </div>
                 </div>
                 <div style={{textAlign: 'left', margin:'2vh 0'}}>
-                    <h3><Form.Label >MTM Re-entry</Form.Label></h3>
+                    <Form.Label >MTM Re-entry</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                </div>
                <div style={{textAlign: 'left', margin:'2vh 0'}}>
-                    <h3><Form.Label >Max no. of re-entries</Form.Label></h3>
+                    <Form.Label >Max no. of re-entries</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                </div>
                <div style={{textAlign: 'left', margin:'2vh 0'}}>
-                    <h3><Form.Label >Action</Form.Label></h3>
+                    <Form.Label >Action</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                </div>
             </div>
-            <div style={{width:'45%'}}>
+            <div style={{width:'45%',  textAlign: 'center'}}>
                 <h3><Form.Label  style={{color : 'gray', margin:'5vh 0'}}>MMT STOPLOSS</Form.Label></h3>
                 <div style={{display : 'flex', justifyContent: 'space-around', textAlign: 'left'}}>
                 <div>
-                    <h3><Form.Label >Fixed Stoploss</Form.Label></h3>
+                    <Form.Label >Fixed Stoploss</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div>
-                    <h3><Form.Label >Value</Form.Label></h3>
+                    <Form.Label >Value</Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>%</InputGroup.Text>
                         <Form.Control aria-label="" />
@@ -256,19 +256,19 @@ function CreateAlgo() {
                 </div>
                 </div>
                <div style={{textAlign: 'left', margin:'2vh 0'}}>
-                    <h3><Form.Label >Profit lock and Trailing stoploss</Form.Label></h3>
+                    <Form.Label >Profit lock and Trailing stoploss</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                </div>
                <div style={{textAlign: 'left', margin:'2vh 0'}}>
-                    <h3><Form.Label >MTM Re-entry</Form.Label></h3>
+                    <Form.Label >MTM Re-entry</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                </div>
                <div style={{textAlign: 'left', margin:'2vh 0'}}>
-                    <h3><Form.Label >Max no. of re-entries</Form.Label></h3>
+                    <Form.Label >Max no. of re-entries</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                </div>
                <div style={{textAlign: 'left'}}>
-                    <h3><Form.Label >Action</Form.Label></h3>
+                    <Form.Label >Action</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                </div>
 
@@ -322,22 +322,22 @@ function CreateAlgo() {
 
             <div style={{display: 'flex', justifyContent:'space-evenly'}}>
                 <div >
-                    <h3><Form.Label >Entry order type:</Form.Label></h3>
+                    <Form.Label >Entry order type:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div>
-                    <h3><Form.Label >Trigger & Limit price buffer in:</Form.Label></h3>
+                    <Form.Label >Trigger & Limit price buffer in:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div>
-                    <h3><Form.Label >Trigger & Limit price buffer value:</Form.Label></h3>
+                    <Form.Label >Trigger & Limit price buffer value:</Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>%</InputGroup.Text>
                         <Form.Control aria-label="" />
                     </InputGroup>                
                 </div>
                 <div>
-                    <h3><Form.Label >Entry with Market order if order Open for (N) secs:</Form.Label></h3>
+                    <Form.Label >Entry with Market order if order Open for (N) secs:</Form.Label>
                     <Form.Control
                             type="number"
                             id="Quantity"
@@ -350,22 +350,22 @@ function CreateAlgo() {
 
             <div style={{display: 'flex', justifyContent:'space-evenly', margin:'3vh 0'}}>
                 <div >
-                    <h3><Form.Label >Exit order type:</Form.Label></h3>
+                    <Form.Label >Exit order type:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div>
-                    <h3><Form.Label >Trigger & Limit price buffer in:</Form.Label></h3>
+                    <Form.Label >Trigger & Limit price buffer in:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div>
-                    <h3><Form.Label >Trigger & Limit price buffer value:</Form.Label></h3>
+                    <Form.Label >Trigger & Limit price buffer value:</Form.Label>
                     <InputGroup className="mb-3">
                         <InputGroup.Text>%</InputGroup.Text>
                         <Form.Control aria-label="" />
                     </InputGroup>                
                 </div>
                 <div>
-                    <h3><Form.Label >Exit with Market order if order Open for (N) secs:</Form.Label></h3>
+                    <Form.Label >Exit with Market order if order Open for (N) secs:</Form.Label>
                     <Form.Control
                             type="number"
                             id="Quantity"
@@ -378,18 +378,18 @@ function CreateAlgo() {
 
             <div style={{display: 'flex', justifyContent:'space-evenly', margin:'3vh 0'}}>
                 <div >
-                    <h3><Form.Label >Exit order type:</Form.Label></h3>
+                    <Form.Label >Exit order type:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div>
-                    <h3><Form.Label >SL placement delay (individual leg):</Form.Label></h3>
+                    <Form.Label >SL placement delay (individual leg):</Form.Label>
                     <InputGroup className="mb-3">
                     <Form.Control aria-label="" />
                         <InputGroup.Text>min:0, max:60</InputGroup.Text>
                     </InputGroup>          
                 </div>
                 <div>
-                    <h3><Form.Label >SL placement delay (MTM SL):</Form.Label></h3>
+                    <Form.Label >SL placement delay (MTM SL):</Form.Label>
                     <InputGroup className="mb-3">
                     <Form.Control aria-label="" />
                         <InputGroup.Text>min:0, max:60</InputGroup.Text>
@@ -399,22 +399,22 @@ function CreateAlgo() {
 
             <div style={{display: 'flex', justifyContent:'space-evenly', margin:'3vh 0'}}>
                 <div >
-                    <h3><Form.Label >Entry order delay:</Form.Label></h3>
+                    <Form.Label >Entry order delay:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div style={{width:'20%'}}>
-                    <h3><Form.Label >by (seconds)</Form.Label></h3>
+                    <Form.Label >by (seconds)</Form.Label>
                     <InputGroup className="mb-3">
                     <Form.Control aria-label="" />
                         <InputGroup.Text>min:0, max:60</InputGroup.Text>
                     </InputGroup>          
                 </div>
                 <div >
-                    <h3><Form.Label >Exit order delay:</Form.Label></h3>
+                    <Form.Label >Exit order delay:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div style={{width:'20%'}}>
-                    <h3><Form.Label >by (seconds)</Form.Label></h3>
+                    <Form.Label >by (seconds)</Form.Label>
                     <InputGroup className="mb-3">
                     <Form.Control aria-label="" />
                         <InputGroup.Text>min:0, max:60</InputGroup.Text>
@@ -425,15 +425,15 @@ function CreateAlgo() {
 
             <div style={{display: 'flex', justifyContent:'space-evenly', margin:'3vh 0'}}>
                 <div >
-                    <h3><Form.Label >Calculate entry from:</Form.Label></h3>
+                    <Form.Label >Calculate entry from:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                 </div>
                 <div style={{width:'20%'}}>
-                    <h3><Form.Label >Calculate exit from:</Form.Label></h3>
+                    <Form.Label >Calculate exit from:</Form.Label>
                     <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />        
                 </div>
                 <div >
-                    <h3><Form.Label >Trailing frequency interval:</Form.Label></h3>
+                    <Form.Label >Trailing frequency interval:</Form.Label>
                     <div style={{display:'flex'}}>
                         <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />
                         <Dropdown options={demoOptions} value={demoOptions[0]} placeholder="Select any option" />

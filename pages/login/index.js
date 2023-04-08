@@ -27,7 +27,7 @@ export default function Login() {
   const handleClick = async () => {
     try{
       let json = await login(email, password);
-
+  
         if(json?.code > 202){
           setHasError(true);
           setErrorMessage(json?.message);
@@ -38,8 +38,9 @@ export default function Login() {
           const accessToken = json?.data?.tokens?.access?.token;
           const refreshToken = json?.data?.tokens?.refresh?.token;
           const userId = json?.data?.user?.id;
+          const name = json?.data?.user?.name;
 
-          setAuth({email, password, accessToken, refreshToken, userId});
+          setAuth({email, password, accessToken, refreshToken, userId, name});
           setData(json);
 
           console.log('token : ', accessToken);
@@ -48,6 +49,7 @@ export default function Login() {
           setLocalStorage('accessToken', accessToken);
           setLocalStorage('refreshToken', refreshToken);
           setLocalStorage('userId', userId);
+          setLocalStorage('name', name);
 
           if(accessToken){
             Router.push(`/dashboard`); 
