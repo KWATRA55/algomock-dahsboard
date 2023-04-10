@@ -4,6 +4,11 @@
     width: 11vw;
 }
 
+
+.headerButton{
+    font-size: 10px;
+  }
+
 .item{
     width: 15%;
 }

@@ -7,6 +7,10 @@
   min-height: 100vh;
 }
 
+.headerButton{
+  font-size: 15px;
+}
+
 .description {
   display: inherit;
   justify-content: inherit;
