@@ -2,7 +2,7 @@ export const baseUrl = 'https://stage.algomock.in/v1/';
 
 export const header = { 'Content-Type': 'application/json' }
 
-export const marketDataRoute = 'wss://ws.algomock.in:8001';
+export const marketDataRoute = 'wss://ws.algomock.in:8001/';
 
 export const url = {
     'auth.register': '/auth/register',

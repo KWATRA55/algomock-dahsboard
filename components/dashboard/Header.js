@@ -31,23 +31,25 @@ function Header() {
     }
   }
 
-  const niftyLocalData = getLocalStorage('niftyLocalData');
-  const bankniftyLocalData = getLocalStorage('niftyLocalData');
-  const finniftyLocalData = getLocalStorage('niftyLocalData');
+  const localMarketData = JSON.parse(getLocalStorage('localMarketData'))
 
   const [currentPrices, setCurrentPrices] = useState({
-    INDEX_NIFTY : niftyLocalData,
-    INDEX_BANKNIFTY: bankniftyLocalData,
-    INDEX_FINNIFTY : finniftyLocalData
+    INDEX_NIFTY : localMarketData.INDEX_NIFTY,
+    INDEX_BANKNIFTY: localMarketData.INDEX_BANKNIFTY,
+    INDEX_FINNIFTY : localMarketData.INDEX_FINNIFTY
   });
 
   
 const socketData = () => {
   const socket = getMarketPrice();
 
-  socket.on('feed', message => {
+  socket.addEventListener('message', function (event) {
+    const message = JSON.parse(event.data);
+    if (message.event === 'feed') {
+      let data = message.data;
+
       Object.keys(currentPrices).forEach((key) => {        
-        let newVal = message[key];
+        let newVal = data[key];
         key = document.getElementById(key);
         let previousVal = parseInt(key.textContent);
         
@@ -62,17 +64,41 @@ const socketData = () => {
       })
       
       setCurrentPrices({
-        INDEX_NIFTY : message.INDEX_NIFTY,
-        INDEX_BANKNIFTY : message.INDEX_BANKNIFTY,
-        INDEX_FINNIFTY : message.INDEX_FINNIFTY
+        INDEX_NIFTY : data.INDEX_NIFTY,
+        INDEX_BANKNIFTY : data.INDEX_BANKNIFTY,
+        INDEX_FINNIFTY : data.INDEX_FINNIFTY
       })
-      setLocalStorage('niftyLocalData', message.INDEX_NIFTY);
-      setLocalStorage('bankniftyLocalData', message.INDEX_BANKNIFTY);
-      setLocalStorage('finniftyLocalData', message.INDEX_FINNIFTY);
+      
+      setLocalStorage('localMarketData', JSON.stringify(data));
+    }
+  });
+  //     Object.keys(currentPrices).forEach((key) => {        
+  //       let newVal = message[key];
+  //       key = document.getElementById(key);
+  //       let previousVal = parseInt(key.textContent);
+        
+  //       if(newVal>  previousVal)
+  //       {
+  //         key.style.color = 'green';
+  //       }
+  //       else if(newVal<previousVal)
+  //       {
+  //         key.style.color = 'red';
+  //       }
+  //     })
+      
+  //     setCurrentPrices({
+  //       INDEX_NIFTY : message.INDEX_NIFTY,
+  //       INDEX_BANKNIFTY : message.INDEX_BANKNIFTY,
+  //       INDEX_FINNIFTY : message.INDEX_FINNIFTY
+  //     })
+  //     setLocalStorage('niftyLocalData', message.INDEX_NIFTY);
+  //     setLocalStorage('bankniftyLocalData', message.INDEX_BANKNIFTY);
+  //     setLocalStorage('finniftyLocalData', message.INDEX_FINNIFTY);
 
-      //const marketData = getLocalStorage('marketData')
-      //console.log('local market data : ', );
-    });
+  //     //const marketData = getLocalStorage('marketData')
+  //     //console.log('local market data : ', );
+  //   });
 }
   
 
