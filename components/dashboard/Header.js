@@ -34,9 +34,9 @@ function Header() {
   const localMarketData = JSON.parse(getLocalStorage('localMarketData'))
 
   const [currentPrices, setCurrentPrices] = useState({
-    INDEX_NIFTY : localMarketData.INDEX_NIFTY,
-    INDEX_BANKNIFTY: localMarketData.INDEX_BANKNIFTY,
-    INDEX_FINNIFTY : localMarketData.INDEX_FINNIFTY
+    INDEX_NIFTY : localMarketData?.INDEX_NIFTY,
+    INDEX_BANKNIFTY: localMarketData?.INDEX_BANKNIFTY,
+    INDEX_FINNIFTY : localMarketData?.INDEX_FINNIFTY
   });
 
   
@@ -68,7 +68,7 @@ const socketData = () => {
         INDEX_BANKNIFTY : data.INDEX_BANKNIFTY,
         INDEX_FINNIFTY : data.INDEX_FINNIFTY
       })
-      
+
       setLocalStorage('localMarketData', JSON.stringify(data));
     }
   });
