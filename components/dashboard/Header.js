@@ -34,9 +34,9 @@ function Header() {
   const localMarketData = JSON.parse(getLocalStorage('localMarketData'))
 
   const [currentPrices, setCurrentPrices] = useState({
-    INDEX_NIFTY : localMarketData?.INDEX_NIFTY,
-    INDEX_BANKNIFTY: localMarketData?.INDEX_BANKNIFTY,
-    INDEX_FINNIFTY : localMarketData?.INDEX_FINNIFTY
+    INDEX_NIFTY : localMarketData?.INDEX_NIFTY || '----',
+    INDEX_BANKNIFTY: localMarketData?.INDEX_BANKNIFTY || '----',
+    INDEX_FINNIFTY : localMarketData?.INDEX_FINNIFTY || '----'
   });
 
   
@@ -47,13 +47,12 @@ const socketData = () => {
     const message = JSON.parse(event.data);
     if (message.event === 'feed') {
       let data = message.data;
-
       Object.keys(currentPrices).forEach((key) => {        
         let newVal = data[key];
         key = document.getElementById(key);
         let previousVal = parseInt(key.textContent);
         
-        if(newVal>  previousVal)
+        if(newVal>previousVal)
         {
           key.style.color = 'green';
         }
@@ -68,6 +67,7 @@ const socketData = () => {
         INDEX_BANKNIFTY : data.INDEX_BANKNIFTY,
         INDEX_FINNIFTY : data.INDEX_FINNIFTY
       })
+     
 
       setLocalStorage('localMarketData', JSON.stringify(data));
     }
@@ -100,10 +100,11 @@ const socketData = () => {
   //     //console.log('local market data : ', );
   //   });
 }
-  
 
   useEffect(() => {
-    socketData();
+    setInterval(() => {
+      socketData();
+    }, 2000);
   }, []);
 
 
